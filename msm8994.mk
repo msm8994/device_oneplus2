@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8994/overlay
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
 ifneq ($(TARGET_USES_AOSP),true)
 TARGET_USES_QCA_NFC := true
@@ -20,12 +20,10 @@ endif
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # copy customized media_profiles and media_codecs xmls for 8994
-ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
-PRODUCT_COPY_FILES += device/qcom/msm8994/media_profiles.xml:system/etc/media_profiles.xml \
-                      device/qcom/msm8994/media_codecs.xml:system/etc/media_codecs.xml
-endif  #TARGET_ENABLE_QC_AV_ENHANCEMENTS
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
+                      $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml
 
-PRODUCT_COPY_FILES += device/qcom/msm8994/whitelistedapps.xml:system/etc/whitelistedapps.xml
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/whitelistedapps.xml:system/etc/whitelistedapps.xml
 
 # Override heap growth limit due to high display density on device
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -33,10 +31,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common64.mk)
 
-PRODUCT_NAME := msm8994
-PRODUCT_DEVICE := msm8994
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := MSM8994 for arm64
+PRODUCT_NAME := oneplus2
+PRODUCT_DEVICE := oneplus2
+PRODUCT_BRAND := Oneplus
+PRODUCT_MODEL := Oneplus2
 
 PRODUCT_BOOT_JARS += tcmiface
 ifneq ($(strip $(QCPATH)),)
@@ -61,29 +59,29 @@ PRODUCT_COPY_FILES += \
     device/qcom/common/media/audio_policy.conf:system/etc/audio_policy.conf
 else
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8994/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 endif
 
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8994/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
-    device/qcom/msm8994/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    device/qcom/msm8994/mixer_paths.xml:system/etc/mixer_paths.xml \
-    device/qcom/msm8994/mixer_paths_i2s.xml:system/etc/mixer_paths_i2s.xml \
-    device/qcom/msm8994/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
-    device/qcom/msm8994/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
-    device/qcom/msm8994/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
-    device/qcom/msm8994/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-    device/qcom/msm8994/audio_platform_info.xml:system/etc/audio_platform_info.xml
+    $(LOCAL_PATH)/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
+    $(LOCAL_PATH)/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/mixer_paths_i2s.xml:system/etc/mixer_paths_i2s.xml \
+    $(LOCAL_PATH)/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
+    $(LOCAL_PATH)/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
+    $(LOCAL_PATH)/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+    $(LOCAL_PATH)/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
+    $(LOCAL_PATH)/audio_platform_info.xml:system/etc/audio_platform_info.xml
 
 # Listen configuration file
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8994/listen_platform_info.xml:system/etc/listen_platform_info.xml
+    $(LOCAL_PATH)/listen_platform_info.xml:system/etc/listen_platform_info.xml
 
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8994/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat \
-    device/qcom/msm8994/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-    device/qcom/msm8994/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin
+    $(LOCAL_PATH)/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat \
+    $(LOCAL_PATH)/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin
 
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
@@ -101,7 +99,7 @@ PRODUCT_PACKAGES += \
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8994/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf \
+    $(LOCAL_PATH)/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
@@ -112,7 +110,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
 
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8994/sensors/hals.conf:system/etc/sensors/hals.conf
+    $(LOCAL_PATH)/sensors/hals.conf:system/etc/sensors/hals.conf
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
@@ -125,7 +123,7 @@ PRODUCT_PACKAGES += \
     antradio_app
 
 PRODUCT_SUPPORTS_VERITY := true
-PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/mmcblk0p28
+PRODUCT_SYSTEM_VERITY_PARTITION :=/dev/block/bootdevice/by-name/system
 PRODUCT_AAPT_CONFIG += xlarge large
 
 # Reduce client buffer size for fast audio output tracks

@@ -14,86 +14,56 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL angler devices, and
-# are also specific to angler devices
+# This file includes all definitions that apply to ALL oneplus2 devices, and
+# are also specific to oneplus2 devices
 #
 # Everything in this directory will become public
 
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/huawei/angler-kernel/Image.gz-dtb
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES := \
-    $(LOCAL_KERNEL):kernel
-
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/init.angler.rc:root/init.angler.rc \
-    device/huawei/angler/init.angler.sensorhub.rc:root/init.angler.sensorhub.rc \
-    device/huawei/angler/init.angler.usb.rc:root/init.angler.usb.rc \
-    device/huawei/angler/fstab.angler:root/fstab.angler \
-    device/huawei/angler/ueventd.angler.rc:root/ueventd.angler.rc \
-    device/huawei/angler/init.angler.power.sh:system/bin/init.angler.power.sh
+    device/oneplus/oneplus2/init.oneplus2.rc:root/init.oneplus2.rc \
+    device/oneplus/oneplus2/init.oneplus2.sensorhub.rc:root/init.oneplus2.sensorhub.rc \
+    device/oneplus/oneplus2/init.oneplus2.usb.rc:root/init.oneplus2.usb.rc \
+    device/oneplus/oneplus2/fstab.oneplus2:root/fstab.oneplus2 \
+    device/oneplus/oneplus2/ueventd.oneplus2.rc:root/ueventd.oneplus2.rc \
+    device/oneplus/oneplus2/init.oneplus2.power.sh:system/bin/init.oneplus2.power.sh
 
 
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/init.mcfg.sh:system/bin/init.mcfg.sh
+    device/oneplus/oneplus2/init.mcfg.sh:system/bin/init.mcfg.sh
 
 # Thermal configuration
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/thermal-engine-angler.conf:system/etc/thermal-engine.conf
+    device/oneplus/oneplus2/thermal-engine-oneplus2.conf:system/etc/thermal-engine.conf
 
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    device/huawei/angler/media_codecs.xml:system/etc/media_codecs.xml \
-    device/huawei/angler/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-    device/huawei/angler/media_profiles.xml:system/etc/media_profiles.xml
+    device/oneplus/oneplus2/media_codecs.xml:system/etc/media_codecs.xml \
+    device/oneplus/oneplus2/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+    device/oneplus/oneplus2/media_profiles.xml:system/etc/media_profiles.xml
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
-    device/huawei/angler/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
-    device/huawei/angler/mixer_paths.xml:system/etc/mixer_paths.xml \
-    device/huawei/angler/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
-    device/huawei/angler/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
-    device/huawei/angler/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-    device/huawei/angler/audio_policy.conf:system/etc/audio_policy.conf \
-    device/huawei/angler/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    device/oneplus/oneplus2/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
+    device/oneplus/oneplus2/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
+    device/oneplus/oneplus2/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/oneplus/oneplus2/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
+    device/oneplus/oneplus2/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+    device/oneplus/oneplus2/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
+    device/oneplus/oneplus2/audio_policy.conf:system/etc/audio_policy.conf \
+    device/oneplus/oneplus2/audio_platform_info.xml:system/etc/audio_platform_info.xml \
 
 # Input device files
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    device/huawei/angler/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl \
-    device/huawei/angler/synaptics_dsx.idc:system/usr/idc/synaptics_dsx.idc
-
-# for launcher layout
-PRODUCT_PACKAGES += \
-    AnglerLayout
-
-# Delegation for OEM customization
-PRODUCT_OEM_PROPERTIES := \
-    ro.config.ringtone \
-    ro.config.notification_sound \
-    ro.config.alarm_alert \
-    ro.config.wallpaper \
-    ro.config.wallpaper_component \
-    ro.oem.* \
-    oem.*
+    device/oneplus/oneplus2/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    device/oneplus/oneplus2/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl \
+    device/oneplus/oneplus2/synaptics_dsx.idc:system/usr/idc/synaptics_dsx.idc
 
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/sec_config:system/etc/sec_config
-
-# Wifi
-PRODUCT_COPY_FILES += \
-    device/huawei/angler/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
-    device/huawei/angler/bcmdhd-pme.cal:system/etc/wifi/bcmdhd-pme.cal \
-    device/huawei/angler/bcmdhd-high.cal:system/etc/wifi/bcmdhd-high.cal \
-    device/huawei/angler/bcmdhd-low.cal:system/etc/wifi/bcmdhd-low.cal
+    device/oneplus/oneplus2/sec_config:system/etc/sec_config
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -131,7 +101,7 @@ PRODUCT_COPY_FILES += \
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
+    device/oneplus/oneplus2/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -151,7 +121,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8994 \
     libgenlock \
     memtrack.msm8994 \
-    lights.angler
+    lights.oneplus2
 
 PRODUCT_PACKAGES += \
     audio.primary.msm8994 \
@@ -189,9 +159,9 @@ PRODUCT_PACKAGES += \
 
 # Sensor & activity_recognition HAL
 PRODUCT_PACKAGES += \
-    sensors.angler \
-    activity_recognition.angler \
-    sensortool.angler \
+    sensors.oneplus2 \
+    activity_recognition.oneplus2 \
+    sensortool.oneplus2 \
     nano4x1.bin
 
 # for off charging mode
@@ -209,20 +179,20 @@ PRODUCT_PACKAGES += \
 # NFC
 PRODUCT_PACKAGES += \
     libnfc-nci \
-    nfc_nci.angler \
+    nfc_nci.oneplus2 \
     NfcNci \
     Tag
 
 # Power HAL
 PRODUCT_PACKAGES += \
-    power.angler
+    power.oneplus2
 
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    device/huawei/angler/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
+    device/oneplus/oneplus2/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    device/oneplus/oneplus2/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
 
 DEVICE_PACKAGE_OVERLAYS := \
-    device/huawei/angler/overlay
+    device/oneplus/oneplus2/overlay
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196609
@@ -294,7 +264,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # For SPN display
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/spn-conf.xml:system/etc/spn-conf.xml
+    device/oneplus/oneplus2/spn-conf.xml:system/etc/spn-conf.xml
 
 # Request modem to send PLMN name always irrespective
 # of display condition in EFSPN.
@@ -329,7 +299,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype="fluence" \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicecomm=true \
-    persist.audio.product.identify="angler" \
+    persist.audio.product.identify="oneplus2" \
     persist.audio.fluence.speaker=true
 
 #stereo speakers: orientation changes swap L/R channels
@@ -369,14 +339,14 @@ PRODUCT_PACKAGES += \
     QXDMLogger
 
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/init.angler.diag.rc.userdebug:root/init.angler.diag.rc
+    device/oneplus/oneplus2/init.oneplus2.diag.rc.userdebug:root/init.oneplus2.diag.rc
 
 # subsystem ramdump collection
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ssr.enable_ramdumps=1
 else
 PRODUCT_COPY_FILES += \
-    device/huawei/angler/init.angler.diag.rc.user:root/init.angler.diag.rc
+    device/oneplus/oneplus2/init.oneplus2.diag.rc.user:root/init.oneplus2.diag.rc
 endif
 
 # Incoming number (b/23529711)
@@ -385,14 +355,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-
-$(call inherit-product-if-exists, hardware/qcom/msm8994/msm8994.mk)
-$(call inherit-product-if-exists, vendor/qcom/gpu/msm8994/msm8994-gpu-vendor.mk)
-
-# copy wlan firmware
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4358/device-bcm.mk)
-
-# setup dm-verity configs.
-PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/system
-PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/vendor
-$(call inherit-product, build/target/product/verity.mk)

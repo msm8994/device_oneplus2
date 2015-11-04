@@ -18,21 +18,21 @@
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
 # Get the long list of APNs
-PRODUCT_COPY_FILES := device/huawei/angler/apns-full-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES := device/oneplus/oneplus2/apns-full-conf.xml:system/etc/apns-conf.xml
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-PRODUCT_NAME := aosp_angler
-PRODUCT_DEVICE := angler
+PRODUCT_NAME := aosp_oneplus2
+PRODUCT_DEVICE := oneplus2
 PRODUCT_BRAND := Android
-PRODUCT_MODEL := AOSP on angler
-PRODUCT_MANUFACTURER := Huawei
-PRODUCT_RESTRICT_VENDOR_FILES := true
+PRODUCT_MODEL := AOSP on oneplus2
+PRODUCT_MANUFACTURER := oneplus
+PRODUCT_RESTRICT_VENDOR_FILES := false
 
-$(call inherit-product, device/huawei/angler/device.mk)
-$(call inherit-product-if-exists, vendor/huawei/angler/device-vendor.mk)
+$(call inherit-product, device/oneplus/oneplus2/device.mk)
+$(call inherit-product-if-exists, vendor/oneplus/oneplus2/device-vendor.mk)
 
 PRODUCT_PACKAGES += \
     Launcher3

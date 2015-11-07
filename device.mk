@@ -55,13 +55,13 @@ PRODUCT_COPY_FILES += \
     device/oneplus/oneplus2/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
     device/oneplus/oneplus2/audio_policy.conf:system/etc/audio_policy.conf \
     device/oneplus/oneplus2/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    device/oneplus/oneplus2/audio/acdb/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
-    device/oneplus/oneplus2/audio/acdb/MTP_General_cal.acdb:system/etc/acdbdata/MTP/MTP_General_cal.acdb \
-    device/oneplus/oneplus2/audio/acdb/MTP_Global_cal.acdb:system/etc/acdbdata/MTP/MTP_Global_cal.acdb \
-    device/oneplus/oneplus2/audio/acdb/MTP_Handset_cal.acdb:system/etc/acdbdata/MTP/MTP_Handset_cal.acdb \
-    device/oneplus/oneplus2/audio/acdb/MTP_Hdmi_cal.acdb:system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb \
-    device/oneplus/oneplus2/audio/acdb/MTP_Headset_cal.acdb:system/etc/acdbdata/MTP/MTP_Headset_cal.acdb \
-    device/oneplus/oneplus2/audio/acdb/MTP_Speaker_cal.acdb:system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_General_cal.acdb:system/etc/acdbdata/MTP/MTP_General_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_Global_cal.acdb:system/etc/acdbdata/MTP/MTP_Global_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_Handset_cal.acdb:system/etc/acdbdata/MTP/MTP_Handset_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_Hdmi_cal.acdb:system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_Headset_cal.acdb:system/etc/acdbdata/MTP/MTP_Headset_cal.acdb \
+    device/oneplus/oneplus2/audio/MTP_Speaker_cal.acdb:system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb \
 
 # Input device files
 PRODUCT_COPY_FILES += \

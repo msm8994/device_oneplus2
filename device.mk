@@ -21,20 +21,23 @@
 
 
 PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/init.oneplus2.rc:root/init.oneplus2.rc \
-    device/oneplus/oneplus2/init.oneplus2.sensorhub.rc:root/init.oneplus2.sensorhub.rc \
-    device/oneplus/oneplus2/init.oneplus2.usb.rc:root/init.oneplus2.usb.rc \
-    device/oneplus/oneplus2/fstab.oneplus2:root/fstab.oneplus2 \
-    device/oneplus/oneplus2/ueventd.oneplus2.rc:root/ueventd.oneplus2.rc \
-    device/oneplus/oneplus2/init.oneplus2.power.sh:system/bin/init.oneplus2.power.sh
-
-
-PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/init.mcfg.sh:system/bin/init.mcfg.sh
+    device/oneplus/oneplus2/init.qcom.rc:root/init.qcom.rc \
+    device/oneplus/oneplus2/init.qcom.usb.rc:root/init.qcom.usb.rc \
+    device/oneplus/oneplus2/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    device/oneplus/oneplus2/init.class_main.sh:root/init.class_main.sh \
+    device/oneplus/oneplus2/init.qcom.bt.sh:root/init.qcom.bt.sh \
+    device/oneplus/oneplus2/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
+    device/oneplus/oneplus2/init.qcom.fm.sh:root/init.qcom.fm.sh \
+    device/oneplus/oneplus2/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh \
+    device/oneplus/oneplus2/init.qcom.sh:root/init.qcom.sh \
+    device/oneplus/oneplus2/init.qcom.uicc.sh:root/init.qcom.uicc.sh \
+    device/oneplus/oneplus2/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    device/oneplus/oneplus2/msm8994_hmp.sh:root/msm8994_hmp.sh \
+    device/oneplus/oneplus2/msm8994_tune.sh:root/msm8994_tune.sh \
 
 # Thermal configuration
 PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/thermal-engine-oneplus2.conf:system/etc/thermal-engine.conf
+    device/oneplus/oneplus2/thermal-engine.conf:system/etc/thermal-engine.conf
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -300,30 +303,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
    fs_config_files
 
-# For data
-PRODUCT_PACKAGES += \
-   librmnetctl
-
 # limit dex2oat threads to improve thermals
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-threads=2 \
     dalvik.vm.image-dex2oat-threads=4
 
 # Modem debugger
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     QXDMLogger
-
-PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/init.oneplus2.diag.rc.userdebug:root/init.oneplus2.diag.rc
-
-# subsystem ramdump collection
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.enable_ramdumps=1
-else
-PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/init.oneplus2.diag.rc.user:root/init.oneplus2.diag.rc
-endif
 
 # Incoming number (b/23529711)
 PRODUCT_PROPERTY_OVERRIDES += \

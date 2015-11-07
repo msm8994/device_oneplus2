@@ -281,7 +281,6 @@ case "$target" in
                 do
                     echo "cpubw_hwmon" > $devfreq_gov
                 done
-                echo 1 > /dev/cpuctl/apps/bg_non_interactive/cpu.upmigrate_discourage
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                 echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
                 echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
@@ -833,6 +832,14 @@ case "$target" in
         # input boost configuration
         echo 0:1248000 > /sys/module/cpu_boost/parameters/input_boost_freq
         echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
+        # core_ctl module
+        insmod /system/lib/modules/core_ctl.ko
+        echo 2 > /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
+        echo 60 > /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres
+        echo 30 > /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres
+        echo 100 > /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms
+        echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster
+        echo 2 > /sys/devices/system/cpu/cpu4/core_ctl/task_thres
         # Setting b.L scheduler parameters
         echo 1 > /proc/sys/kernel/sched_migration_fixup
         echo 30 > /proc/sys/kernel/sched_small_task
@@ -934,12 +941,6 @@ case "$target" in
         do
             echo -n enable > $mode
         done
-        # plugin remaining A57s after 30s to avoid bootup peak current issue
-	# VENDOR_EDIT
-        sleep 10 && echo 1 > /sys/devices/system/cpu/cpu5/online
-        sleep 10 && echo 1 > /sys/devices/system/cpu/cpu6/online
-        sleep 10 && echo 1 > /sys/devices/system/cpu/cpu7/online
-	# END
         # enable LPM
         echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
         # Restore CPU 4 max freq from msm_performance
@@ -1206,10 +1207,4 @@ if [ -c /dev/coresight-stm ]; then
 fi
 
 # Start RIDL/LogKit II client
-#su -c /system/vendor/bin/startRIDL.sh &
-
-#VENDOR_EDIT
-#add by jiangyg for new governor param
-/system/bin/sh /system/etc/msm8994_tune.sh &
-/system/bin/sh /system/etc/msm8994_hmp.sh &
-#END VENDOR_EDIT
+su -c /system/vendor/bin/startRIDL.sh &

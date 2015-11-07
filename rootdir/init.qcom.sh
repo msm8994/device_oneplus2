@@ -35,17 +35,12 @@ fi
 #
 # Function to start sensors for DSPS enabled platforms
 #
-# VENDOR_EDIT
-# qiuchangping@BSP 2015-04-16 add begin for gyro sensitity calibration
 start_sensors()
 {
     if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
-        mkdir -p /persist/sensors
         chmod -h 775 /persist/sensors
         chmod -h 664 /persist/sensors/sensors_settings
         chown -h system.root /persist/sensors/sensors_settings
-        chmod -h 664 /persist/sensors/gyro_sensitity_cal
-        chown -h system.root /persist/sensors/gyro_sensitity_cal
 
         mkdir -p /data/misc/sensors
         chmod -h 775 /data/misc/sensors
@@ -53,7 +48,6 @@ start_sensors()
         start sensors
     fi
 }
-# qiucahngping@BSP add end
 
 start_battery_monitor()
 {
@@ -117,16 +111,15 @@ start_msm_irqbalance()
 	fi
 }
 
+start_copying_prebuilt_qcril_db()
+{
+    if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
+        cp /system/vendor/qcril.db /data/misc/radio/qcril.db
+        chown -h radio.radio /data/misc/radio/qcril.db
+    fi
+}
+
 baseband=`getprop ro.baseband`
-#
-# Suppress default route installation during RA for IPV6; user space will take
-# care of this
-# exception default ifc
-for file in /proc/sys/net/ipv6/conf/*
-do
-  echo 0 > $file/accept_ra_defrtr
-done
-echo 1 > /proc/sys/net/ipv6/conf/default/accept_ra_defrtr
 
 case "$baseband" in
         "svlte2a")
@@ -135,6 +128,7 @@ case "$baseband" in
 esac
 
 start_sensors
+start_copying_prebuilt_qcril_db
 
 case "$target" in
     "msm7630_surf" | "msm7630_1x" | "msm7630_fusion")
@@ -267,10 +261,7 @@ esac
 #
 rm -rf /data/misc/radio/modem_config
 mkdir /data/misc/radio/modem_config
-#ifdef VENDOR_EDIT
-# Modify /data/misc/radio/modem_config authority to 770 from 660, and modify the target path to /system/etc/firmware/mbn_ota/, by hanqingpu@oneplus.cn, 20150530
-chmod 770 /data/misc/radio/modem_config
-cp -r /system/etc/firmware/mbn_ota/* /data/misc/radio/modem_config
-#endif /*VENDOR_EDIT*/
+chmod 660 /data/misc/radio/modem_config
+cp -r /firmware/image/modem_pr/mbn_ota/* /data/misc/radio/modem_config
 chown -hR radio.radio /data/misc/radio/modem_config
 echo 1 > /data/misc/radio/copy_complete

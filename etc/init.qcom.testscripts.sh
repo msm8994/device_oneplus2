@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+# Copyright (c) 2015, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,31 +26,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# This is the file for test teams to trigger their test setup.
 #
-# start ril-daemon only for targets on which radio is present
-#
-
-start qmuxd
-start ipacm-diag
-start ipacm
-
-datamode=`getprop persist.data.mode`
-multisim=`getprop persist.radio.multisim.config`
-
-if [ "$multisim" = "dsds" ] || [ "$multisim" = "dsda" ]; then
-    start ril-daemon2
-fi
-
-case "$datamode" in
-    "tethered")
-        start qti
-        start port-bridge
-        ;;
-    "concurrent")
-        start qti
-        start netmgrd
-        ;;
-    *)
-        start netmgrd
-        ;;
-esac
+# Sample command: /system/bin/sh /sdcard/command.sh
+# All the output files will be created under root privilege. Please use
+# "adb root" before pulling the generated files.

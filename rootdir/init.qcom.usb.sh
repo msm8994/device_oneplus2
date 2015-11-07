@@ -107,9 +107,8 @@ fi
 baseband=`getprop ro.baseband`
 echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
 usb_config=`getprop persist.sys.usb.config`
-echo "BEFORE: $usb_config" > /dev/kmsg
 case "$usb_config" in
-    "" | "adb" | "none") #USB persist config not set, select default configuration
+    "" | "adb") #USB persist config not set, select default configuration
       case "$esoc_link" in
           "HSIC")
               setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
@@ -164,17 +163,6 @@ case "$usb_config" in
     * ) ;; #USB persist config exists, do nothing
 esac
 
-boot_mode=`getprop ro.boot.ftm_mode`
-echo "boot_mode: $boot_mode" > /dev/kmsg
-case "$boot_mode" in
-    "ftm_at" | "ftm_rf" | "ftm_wlan" | "ftm_mos")
-        echo "FTM FORCE diag,adb" > /dev/kmsg
-        setprop persist.sys.usb.config diag,adb
-    ;;
-esac
-
-usb_config=`getprop persist.sys.usb.config`
-echo "AFTER: $usb_config" > /dev/kmsg
 #
 # Do target specific things
 #

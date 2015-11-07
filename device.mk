@@ -20,24 +20,17 @@
 # Everything in this directory will become public
 
 
+# Ramdisk
 PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/init.qcom.rc:root/init.qcom.rc \
-    device/oneplus/oneplus2/init.qcom.usb.rc:root/init.qcom.usb.rc \
-    device/oneplus/oneplus2/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    device/oneplus/oneplus2/init.class_main.sh:root/init.class_main.sh \
-    device/oneplus/oneplus2/init.qcom.bt.sh:root/init.qcom.bt.sh \
-    device/oneplus/oneplus2/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
-    device/oneplus/oneplus2/init.qcom.fm.sh:root/init.qcom.fm.sh \
-    device/oneplus/oneplus2/init.qcom.post_boot.sh:root/init.qcom.post_boot.sh \
-    device/oneplus/oneplus2/init.qcom.sh:root/init.qcom.sh \
-    device/oneplus/oneplus2/init.qcom.uicc.sh:root/init.qcom.uicc.sh \
-    device/oneplus/oneplus2/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/oneplus/oneplus2/msm8994_hmp.sh:root/msm8994_hmp.sh \
-    device/oneplus/oneplus2/msm8994_tune.sh:root/msm8994_tune.sh \
+    $(call find-copy-subdir-files,*,device/oneplus/oneplus2/rootdir,root)
+
+# ETC scripts
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,device/oneplus/oneplus2/etc,system/etc)
 
 # Thermal configuration
 PRODUCT_COPY_FILES += \
-    device/oneplus/oneplus2/thermal-engine.conf:system/etc/thermal-engine.conf
+    device/oneplus/oneplus2/thermal-engine.conf:system/etc/thermal-engine.conf \
 
 # Media
 PRODUCT_COPY_FILES += \
